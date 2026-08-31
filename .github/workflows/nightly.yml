@@ -1,0 +1,47 @@
+name: nightly
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  rescan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rescan published image against today's CVE feed
+        env:
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          . ci/upstream.env
+          ref="ghcr.io/$OWNER/$IMAGE_NAME:$UPSTREAM_REF-$(echo "$UPSTREAM_SHA" | cut -c1-7)"
+          mkdir -p .out/scan
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$PWD/.out/scan:/out" aquasec/trivy:latest image "$ref" \
+            --severity HIGH,CRITICAL --ignore-unfixed \
+            --format sarif --output /out/nightly.sarif
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: .out/scan/nightly.sarif
+          category: nightly-image
+
+  upstream-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare pinned SHA against latest upstream tag
+        run: |
+          set -euo pipefail
+          . ci/upstream.env
+          latest=$(git ls-remote --tags --refs "$UPSTREAM_REPO" \
+            | awk -F/ '{print $NF}' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)
+          echo "pinned=$UPSTREAM_REF latest=$latest"
+          if [ "$UPSTREAM_REF" != "$latest" ]; then
+            echo "::warning::upstream released $latest, this lab is pinned at $UPSTREAM_REF"
+          fi

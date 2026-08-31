@@ -1,0 +1,44 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/OWNER/orchardcore-cms
+  digest: ""
+  tag: v3.0.1
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: nginx
+  host: cms.example.com
+
+resources:
+  requests: { cpu: 200m, memory: 512Mi }
+  limits: { cpu: "2", memory: 2Gi }
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: ""
+
+env:
+  ASPNETCORE_ENVIRONMENT: Production
+  OrchardCore__OrchardCore_Media__MaxFileSize: "10485760"
+
+podSecurityContext:
+  fsGroup: 1654
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1654
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  capabilities: { drop: ["ALL"] }
+
+probes:
+  path: /
+  initialDelaySeconds: 20

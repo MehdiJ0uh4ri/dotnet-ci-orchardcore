@@ -1,0 +1,10 @@
+**/upstream/**/bin
+**/upstream/**/obj
+**/node_modules
+.git
+.nuget
+.cache
+docs
+helm
+argocd
+it

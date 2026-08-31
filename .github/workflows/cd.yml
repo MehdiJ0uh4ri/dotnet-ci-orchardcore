@@ -1,0 +1,67 @@
+name: cd
+
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      digest:
+        description: image digest (sha256:...)
+        required: true
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  gitops:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Resolve digest
+        id: d
+        env:
+          INPUT_DIGEST: ${{ inputs.digest }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          if [ -n "${INPUT_DIGEST:-}" ]; then
+            echo "digest=$INPUT_DIGEST" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          . ci/upstream.env
+          ref="ghcr.io/$OWNER/$IMAGE_NAME:$UPSTREAM_REF-$(echo "$UPSTREAM_SHA" | cut -c1-7)"
+          d=$(docker buildx imagetools inspect "$ref" --format '{{json .Manifest}}' | jq -r .digest)
+          echo "digest=$d" >> "$GITHUB_OUTPUT"
+
+      - name: Pin digest into chart values
+        env:
+          DIGEST: ${{ steps.d.outputs.digest }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          [ -n "$DIGEST" ] || { echo "no digest resolved"; exit 1; }
+          sed -i "s|^  repository: .*|  repository: ghcr.io/$OWNER/orchardcore-cms|" helm/orchardcore/values.yaml
+          sed -i "s|^  digest: .*|  digest: \"$DIGEST\"|" helm/orchardcore/values.yaml
+          if git diff --quiet; then
+            echo "digest unchanged, Argo CD already in sync"
+            exit 0
+          fi
+          git config user.name  "ci-bot"
+          git config user.email "ci-bot@users.noreply.github.com"
+          git commit -am "chore(cd): pin orchardcore-cms@$(echo "$DIGEST" | cut -c1-19)"
+          git push
+
+      - name: Render manifests (sanity)
+        run: |
+          set -euo pipefail
+          helm template cms helm/orchardcore \
+            -f helm/orchardcore/values.yaml \
+            -f helm/orchardcore/values-prod.yaml > /tmp/rendered.yaml
+          grep -q '@sha256:' /tmp/rendered.yaml || { echo "chart is not digest-pinned"; exit 1; }

@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dotnet-ci-lab
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://github.com/OWNER/dotnet-ci-orchardcore.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: cms
+  clusterResourceWhitelist: []
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"

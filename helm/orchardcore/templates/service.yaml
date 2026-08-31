@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "orchardcore.fullname" . }}
+  labels: {{- include "orchardcore.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "orchardcore.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

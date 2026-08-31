@@ -1,0 +1,9 @@
+replicaCount: 3
+ingress:
+  enabled: true
+  host: cms.example.com
+resources:
+  requests: { cpu: 500m, memory: 1Gi }
+  limits: { cpu: "2", memory: 3Gi }
+persistence:
+  size: 20Gi

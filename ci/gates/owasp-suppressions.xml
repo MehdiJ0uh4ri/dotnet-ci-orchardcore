@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+  <suppress>
+    <notes>Test-only assemblies never ship in the runtime image.</notes>
+    <filePath regex="true">.*[\/]test[\/].*</filePath>
+    <cvssBelow>10</cvssBelow>
+  </suppress>
+  <suppress>
+    <notes>Client-side assets are excluded from the published app.</notes>
+    <filePath regex="true">.*[\/]node_modules[\/].*</filePath>
+    <cvssBelow>10</cvssBelow>
+  </suppress>
+</suppressions>

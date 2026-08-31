@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "orchardcore.fullname" . }}
+  labels: {{- include "orchardcore.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "orchardcore.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels: {{- include "orchardcore.labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext: {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: cms
+          image: {{ include "orchardcore.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext: {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            {{- range $k, $v := .Values.env }}
+            - name: {{ $k }}
+              value: {{ $v | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet: { path: {{ .Values.probes.path | quote }}, port: http }
+            initialDelaySeconds: {{ .Values.probes.initialDelaySeconds }}
+          livenessProbe:
+            httpGet: { path: {{ .Values.probes.path | quote }}, port: http }
+            initialDelaySeconds: {{ add .Values.probes.initialDelaySeconds 30 }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: appdata
+              mountPath: /app/App_Data
+      volumes:
+        - name: appdata
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "orchardcore.fullname" . }}-data
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
