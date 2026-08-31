@@ -36,6 +36,10 @@ The nightly `upstream-drift` job warns when a newer tag exists. It never bumps t
 | `ARTIFACTORY_URL`, `ARTIFACTORY_NUGET_REPO`, `ARTIFACTORY_USER`, `ARTIFACTORY_TOKEN` | secrets | switches restore onto the Artifactory virtual feed |
 | `SELF_CONTAINED` | var | `true` publishes self-contained onto `runtime-deps` |
 | `ACR_SERVICE_CONNECTION` | Azure DevOps | ACR push in `azure-pipelines.yml` |
+| `ACR_USERNAME`, `ACR_PASSWORD` | secrets | ACR push from GitHub Actions without `az` |
+| `CODECOV_TOKEN` | secret | PR coverage comments |
+| `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` | secrets | OIDC login for the `deploy` workflow |
+| `APP_SERVICE_NAME`, `AZURE_RESOURCE_GROUP`, `AKS_CLUSTER` | vars | deploy targets |
 
 Leaving the Artifactory variables unset makes every script fall back to
 `ci/nuget/public.config` (nuget.org) — no branching in the pipeline definition.
@@ -51,6 +55,12 @@ deploy cannot slip through.
 Rollback = revert the `chore(cd): pin ...` commit; Argo CD self-heals to the previous
 digest.
 
+For the non-GitOps targets, the `deploy` workflow takes a digest-pinned ref and runs either
+`ci/deploy-appservice.sh` (Azure App Service for Containers — sets `WEBSITES_PORT=8080`,
+restarts, polls the hostname) or `ci/deploy-aks.sh` (`helm upgrade --install --wait` plus
+`kubectl rollout status`). Both refuse anything that is not `...@sha256:...`. Rollback there
+is re-running the workflow with the previous digest, or `helm rollback cms`.
+
 ## Failure triage
 
 | Symptom | Cause | Fix |
@@ -62,3 +72,5 @@ digest.
 | CMS container starts then exits 139 | trimmed publish | `PublishTrimmed=false` |
 | Black-box `Runs_as_non_root` fails | Dockerfile `USER` lost during a base image bump | keep UID 1654 |
 | `sha mismatch` from bootstrap | tag was moved upstream | re-resolve the SHA, update `ci/upstream.env` |
+| App Service deploy times out, container log empty | missing `WEBSITES_PORT` | see quirk 14 |
+| Sonar shows coverage that does not match the artifact | auto-discovered stale report | keep the empty `sonar.cs.*.reportsPaths` overrides |

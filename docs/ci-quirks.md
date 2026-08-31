@@ -141,3 +141,53 @@ A solution-level `dotnet build -f net10.0` sets `TargetFramework` as a global pr
 every project in the graph and that one project fails with "not compatible". The TFM is
 therefore only ever passed at the *project* level (`dotnet test`, `dotnet publish`), never
 at the solution level.
+
+## 12. .NET Aspire is the wrong tool for *this* upstream
+
+The modern answer to "integration tests need a database" is Aspire: an AppHost project
+declares Redis/SQL/Postgres resources and `DistributedApplicationTestingBuilder` boots the
+whole graph inside one test host, so CI needs no compose file and no Testcontainers
+lifetime management.
+
+It does not apply here, for a reason worth writing down: Aspire is opt-in at the *solution*
+level — it needs an `AppHost` project and `Aspire.Hosting.Testing` wired into the test
+projects. OrchardCore has neither, and adding them is patching upstream. Aspire also
+orchestrates *services the app under test talks to*; this lab's black-box suite tests the
+**published image**, which Aspire has no notion of.
+
+So: Testcontainers for both the upstream integration suite (which brings its own
+S3/file-storage dependencies) and for `it/`, where the image itself is the container under
+test and Postgres is a sidecar. On an Aspire-native repo the `it/` fixture would collapse to
+
+```csharp
+var app = await DistributedApplicationTestingBuilder.CreateAsync<Projects.AppHost>();
+await app.StartAsync();
+var client = app.CreateHttpClient("cms");
+```
+
+and the `integration` CI job would lose its Docker requirement entirely — but it would also
+stop testing the artifact that actually ships.
+
+## 13. Cobertura goes to two places, for two audiences
+
+One `unit.cobertura.xml` feeds:
+
+- **SonarCloud** via `sonar.cs.cobertura.reportsPaths` — the quality gate, which blocks the
+  PR on *new-code* coverage rather than on the absolute number.
+- **Codecov** via `codecov/codecov-action` — the inline PR comment and per-file diff view.
+
+The other Sonar coverage properties (`opencover`, `vscoveragexml`, `coverageReportPaths`)
+are explicitly set empty in `ci/sonar.sh`: leaving them unset lets the scanner auto-discover
+stale reports from a previous run's `.sonarqube` folder and silently report the wrong number.
+
+`ci/coverage-report.sh` writes the same numbers into `$GITHUB_STEP_SUMMARY`, so the gate
+value is visible without opening either SaaS.
+
+## 14. App Service containers need `WEBSITES_PORT`
+
+`ci/deploy-appservice.sh` sets `WEBSITES_PORT=8080` alongside the image. Without it App
+Service probes port 80, the container answers on 8080, and the deploy fails as a health
+timeout with nothing useful in the container log. Deploys are digest-pinned
+(`registry/name@sha256:...`) and `deploy.yml` refuses a tag-only ref outright — App Service
+caches image tags aggressively, so `:latest` produces deploys that "succeed" while running
+yesterday's build.

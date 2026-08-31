@@ -8,7 +8,7 @@ Upstream is fetched at that SHA into `upstream/` and never patched. The single p
 coupling is `ci/upstream.env`.
 
 ```
-restore ─ build ─ test+coverlet ─ sonarcloud ─ publish ─ image ─ sbom ─ trivy/owasp ─ blackbox ─ push ─ gitops
+restore ─ build ─ test+coverlet ─ sonarcloud ─ publish ─ image ─ sbom ─ trivy/owasp ─ blackbox ─ push ─ gitops/deploy
 ```
 
 ## Layout
@@ -22,7 +22,7 @@ restore ─ build ─ test+coverlet ─ sonarcloud ─ publish ─ image ─ sbo
 | `ci/docker/` | runtime image, base swaps on `SELF_CONTAINED` |
 | `it/` | xUnit v3 + Testcontainers black-box suite against the built image |
 | `helm/`, `argocd/` | digest-pinned chart and the Argo CD application |
-| `.github/workflows/` | `ci` → `cd` (GitOps digest write) → `nightly` (rescan + drift) |
+| `.github/workflows/` | `ci` → `cd` (GitOps digest write) → `nightly` (rescan + drift), plus `deploy` (App Service / AKS, digest-only) |
 | `azure-pipelines.yml` | the same scripts under Azure DevOps `Cache@2` |
 | `docs/` | `ci-quirks.md`, `runbook.md`, `decisions.md` |
 
@@ -40,8 +40,10 @@ Every CI job is one `make` target — the YAML only schedules.
 dotnet 10 CLI · xUnit v3 (Microsoft.Testing.Platform) · Coverlet console · SonarCloud ·
 Trivy · OWASP dependency-check · Syft (CycloneDX + SPDX) · Testcontainers .NET ·
 GitHub Actions + Azure Pipelines · Artifactory NuGet virtual feed · GHCR / ACR ·
-Helm + Argo CD
+Helm + Argo CD · Azure App Service for Containers / AKS · Codecov
 
 The parts that make .NET CI awkward — the MTP runner, Central Package Management and
 cache keys, upstream's own `NuGet.config` winning config discovery, self-contained publish
-picking a different base image — are written up in [docs/ci-quirks.md](docs/ci-quirks.md).
+picking a different base image, why .NET Aspire does *not* replace Testcontainers on an
+upstream you cannot edit — are written up in [docs/ci-quirks.md](docs/ci-quirks.md) (14 of
+them).

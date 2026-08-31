@@ -99,3 +99,45 @@ stages:
               repository: orchardcore-cms
               command: push
               tags: $(Build.BuildId)
+
+  - stage: deploy
+    dependsOn: package
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: app_service
+        environment: production
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - task: AzureWebAppContainer@1
+                  displayName: Azure App Service (container)
+                  inputs:
+                    azureSubscription: $(AZURE_SERVICE_CONNECTION)
+                    appName: $(APP_SERVICE_NAME)
+                    containers: $(ACR_LOGIN_SERVER)/orchardcore-cms:$(Build.BuildId)
+                    appSettings: -WEBSITES_PORT 8080 -ASPNETCORE_URLS http://+:8080
+
+      - deployment: aks
+        dependsOn: app_service
+        environment: production-aks
+        condition: eq(variables['DEPLOY_AKS'], 'true')
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - task: HelmDeploy@0
+                  inputs:
+                    connectionType: Azure Resource Manager
+                    azureSubscription: $(AZURE_SERVICE_CONNECTION)
+                    azureResourceGroup: $(AZURE_RESOURCE_GROUP)
+                    kubernetesCluster: $(AKS_CLUSTER)
+                    namespace: cms
+                    command: upgrade
+                    chartType: FilePath
+                    chartPath: helm/orchardcore
+                    releaseName: cms
+                    valueFile: helm/orchardcore/values-prod.yaml
+                    arguments: --install --wait --timeout 10m --set image.repository=$(ACR_LOGIN_SERVER)/orchardcore-cms --set image.tag=$(Build.BuildId)

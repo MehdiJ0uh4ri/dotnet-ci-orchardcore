@@ -4,7 +4,7 @@ export
 
 IMAGE_REF ?= $(IMAGE_NAME):$(UPSTREAM_REF)
 
-.PHONY: help bootstrap restore build test test-integration blackbox coverage sonar publish image sbom trivy owasp push ci lint-helm clean distclean
+.PHONY: help bootstrap restore build test test-integration blackbox coverage coverage-report sonar publish image sbom trivy owasp push deploy-appservice deploy-aks ci lint-helm clean distclean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | sed 's/:.*## /\t/'
@@ -23,6 +23,9 @@ test: ## unit tests + coverlet cobertura
 
 coverage: ## enforce the line-coverage gate
 	./ci/coverage-gate.sh
+
+coverage-report: ## print the coverage table
+	./ci/coverage-report.sh
 
 test-integration: ## upstream integration suite (needs docker)
 	./ci/test-integration.sh
@@ -50,6 +53,12 @@ owasp: ## owasp dependency-check on the NuGet graph
 
 push: ## tag and push to $(REGISTRY)
 	IMAGE_REF=$(IMAGE_REF) ./ci/push.sh
+
+deploy-appservice: ## set the digest-pinned image on Azure App Service
+	./ci/deploy-appservice.sh
+
+deploy-aks: ## helm upgrade --install onto the current kube context
+	./ci/deploy-aks.sh
 
 lint-helm: ## helm lint + template
 	helm lint helm/orchardcore
