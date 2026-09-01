@@ -1,0 +1,8 @@
+upstream/
+.out/
+.nuget/
+.cache/
+bin/
+obj/
+*.user
+.sonarqube/
