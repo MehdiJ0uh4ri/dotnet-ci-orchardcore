@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="880" viewBox="0 0 1400 880" font-family="Segoe UI,Helvetica,Arial,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#57606A"/></marker><marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8C959F"/></marker></defs>
+<rect width="1400" height="880" fill="#FFFFFF"/>
+<text x="40" y="44" font-size="19" font-weight="700" fill="#1F2328">dotnet-ci-orchardcore</text><text x="266" y="44" font-size="15" fill="#57606A">— CI/CD built around an unforked OSS repo</text>
+<rect x="40" y="190" width="1000" height="300" rx="8" fill="#F6F8FA" stroke="#8250DF" stroke-width="1.2"/>
+<text x="54" y="212" font-size="12.5" fill="#6E40C9" font-weight="600">GitHub Actions · ci.yml — every job is one make target → ci/*.sh</text>
+<path d="M290 122 L340 122" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="340" y="116" font-size="10" fill="#57606A" text-anchor="middle">pinned SHA</text>
+<path d="M465 154 L465 202 L110 202 L110 250" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M765 154 L765 202 L180 202 L180 250" fill="none" stroke="#8C959F" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#ad)"/>
+<text x="186" y="196" font-size="10" fill="#57606A" text-anchor="start">packages</text>
+<path d="M225 282 L250 282" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="250" y="276" font-size="10" fill="#57606A" text-anchor="middle">--no-restore</text>
+<path d="M410 282 L435 282" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M595 282 L620 282" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="620" y="276" font-size="10" fill="#57606A" text-anchor="middle">cobertura</text>
+<path d="M780 282 L805 282" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M885 314 L885 342 L145 342 L145 370" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="151" y="336" font-size="10" fill="#57606A" text-anchor="start">.out/app</text>
+<path d="M225 402 L250 402" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M410 402 L435 402" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M595 402 L620 402" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M780 402 L805 402" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M885 434 L885 507 L165 507 L165 580" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="171" y="501" font-size="10" fill="#57606A" text-anchor="start">push by digest</text>
+<path d="M290 612 L340 612" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M590 612 L640 612" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="640" y="606" font-size="10" fill="#57606A" text-anchor="middle">git commit</text>
+<path d="M890 612 L940 612" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<text x="940" y="606" font-size="10" fill="#57606A" text-anchor="middle">sync</text>
+<path d="M228 644 L228 682 L765 682 L765 720" fill="none" stroke="#8C959F" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#ad)"/>
+<text x="771" y="676" font-size="10" fill="#57606A" text-anchor="start">manual</text>
+<path d="M890 752 L940 752" fill="none" stroke="#57606A" stroke-width="1.4"  marker-end="url(#a)"/>
+<path d="M102 720 L102 644" fill="none" stroke="#8C959F" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#ad)"/>
+<path d="M1080 282 L1060 282 L1060 304 L1040 304" fill="none" stroke="#8C959F" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#ad)"/>
+<text x="1066" y="298" font-size="10" fill="#57606A" text-anchor="start">mirror</text>
+<rect x="40" y="90" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(51,110.0)"><circle cx="12" cy="12" r="11.5" fill="#1f2328"/><path d="M12 5c-3.6 0-6.5 2.9-6.5 6.6 0 2.9 1.9 5.3 4.4 6.2.3.1.4-.1.4-.3v-1.1c-1.8.4-2.2-.8-2.2-.8-.3-.8-.7-1-.7-1-.6-.4 0-.4 0-.4.7 0 1 .7 1 .7.6 1 1.6.7 2 .6.1-.4.2-.7.4-.9-1.4-.2-2.9-.7-2.9-3.2 0-.7.2-1.3.7-1.8-.1-.2-.3-.9.1-1.8 0 0 .5-.2 1.8.7.5-.2 1.1-.2 1.6-.2s1.1 0 1.6.2c1.2-.9 1.8-.7 1.8-.7.4.9.1 1.6.1 1.8.4.5.7 1.1.7 1.8 0 2.5-1.5 3-2.9 3.2.2.2.4.6.4 1.2v1.8c0 .2.1.4.4.3 2.5-.9 4.4-3.3 4.4-6.2C18.5 7.9 15.6 5 12 5z" fill="#fff"/></g>
+<text x="85" y="117" font-size="12.5" font-weight="600" fill="#1F2328">OrchardCore v3.0.1</text>
+<text x="85" y="133" font-size="10" fill="#57606A">upstream · never forked</text>
+<rect x="340" y="90" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(351,110.0)"><rect x="1" y="1" width="22" height="22" rx="5" fill="#512BD4"/><text x="12" y="15.5" font-family="Segoe UI,Arial,sans-serif" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">.NET</text></g>
+<text x="385" y="117" font-size="12.5" font-weight="600" fill="#1F2328">ci/bootstrap.sh</text>
+<text x="385" y="133" font-size="10" fill="#57606A">SHA-pinned fetch → upstream/</text>
+<rect x="640" y="90" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(651,110.0)"><circle cx="12" cy="12" r="11.5" fill="#41BF47"/><text x="12" y="15.5" font-family="Segoe UI,Arial,sans-serif" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">JF</text></g>
+<text x="685" y="117" font-size="12.5" font-weight="600" fill="#1F2328">Artifactory NuGet feed</text>
+<text x="685" y="133" font-size="10" fill="#57606A">--configfile wins discovery</text>
+<rect x="1080" y="250" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(1091,270.0)"><path d="M10.2 3.4h4.9L20.9 20.6H14l-6.4-2.3 5.1-.6-2.9-3.8z" fill="#0078D4"/><path d="M8.6 6.2L3.1 18h4.5L15.3 3.4h-5z" fill="#5EA0EF"/></g>
+<text x="1125" y="277" font-size="12.5" font-weight="600" fill="#1F2328">azure-pipelines.yml</text>
+<text x="1125" y="293" font-size="10" fill="#57606A">same ci/*.sh · Cache@2</text>
+<rect x="65" y="250" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(76,270.0)"><rect x="1" y="1" width="22" height="22" rx="5" fill="#004880"/><path d="M12 5.6l5.6 3.2v6.4L12 18.4 6.4 15.2V8.8z" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M6.4 8.8L12 12l5.6-3.2M12 12v6.4" fill="none" stroke="#fff" stroke-width="1.1"/></g>
+<text x="110" y="277" font-size="12.5" font-weight="600" fill="#1F2328">restore</text>
+<text x="110" y="293" font-size="10" fill="#57606A">key = SHA + CPM props</text>
+<rect x="250" y="250" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(261,270.0)"><rect x="1" y="1" width="22" height="22" rx="5" fill="#512BD4"/><text x="12" y="15.5" font-family="Segoe UI,Arial,sans-serif" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">.NET</text></g>
+<text x="295" y="277" font-size="12.5" font-weight="600" fill="#1F2328">build</text>
+<text x="295" y="293" font-size="10" fill="#57606A">no -f on the solution</text>
+<rect x="435" y="250" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(446,270.0)"><circle cx="12" cy="12" r="11.5" fill="#2E7D32"/><path d="M6.8 12.4l3.4 3.3L17.2 8.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></g>
+<text x="480" y="277" font-size="12.5" font-weight="600" fill="#1F2328">test</text>
+<text x="480" y="293" font-size="10" fill="#57606A">xUnit v3 + Coverlet</text>
+<rect x="620" y="250" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(631,270.0)"><circle cx="12" cy="12" r="11.5" fill="#fff" stroke="#4E9BCD" stroke-width="1.2"/><path d="M5 18.6A13.6 13.6 0 0 1 18.6 5" fill="none" stroke="#4E9BCD" stroke-width="1.7"/><path d="M5 14.6A9.6 9.6 0 0 1 14.6 5" fill="none" stroke="#4E9BCD" stroke-width="1.7"/><path d="M5 10.6A5.6 5.6 0 0 1 10.6 5" fill="none" stroke="#4E9BCD" stroke-width="1.7"/></g>
+<text x="665" y="277" font-size="12.5" font-weight="600" fill="#1F2328">SonarCloud</text>
+<text x="665" y="293" font-size="10" fill="#57606A">quality gate</text>
+<rect x="805" y="250" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(816,270.0)"><rect x="1" y="1" width="22" height="22" rx="5" fill="#512BD4"/><text x="12" y="15.5" font-family="Segoe UI,Arial,sans-serif" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">.NET</text></g>
+<text x="850" y="277" font-size="12.5" font-weight="600" fill="#1F2328">publish</text>
+<text x="850" y="293" font-size="10" fill="#57606A">linux-x64 · SC opt-in</text>
+<rect x="65" y="370" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(76,390.0)"><rect x="1" y="1" width="22" height="22" rx="5" fill="#2496ED"/><g fill="#fff"><rect x="6.2" y="10" width="3" height="3"/><rect x="9.8" y="10" width="3" height="3"/><rect x="13.4" y="10" width="3" height="3"/><rect x="9.8" y="6.4" width="3" height="3"/></g><path d="M4 14.4h15.4c0 3-2.4 4.8-5.6 4.8h-4.6C6.2 19.2 4 17.3 4 14.4z" fill="#fff"/></g>
+<text x="110" y="397" font-size="12.5" font-weight="600" fill="#1F2328">image</text>
+<text x="110" y="413" font-size="10" fill="#57606A">aspnet / runtime-deps</text>
+<rect x="250" y="370" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(261,390.0)"><rect x="4" y="2.5" width="16" height="19" rx="2" fill="#fff" stroke="#57606a" stroke-width="1.4"/><path d="M7.5 8h9M7.5 11.5h9M7.5 15h6" stroke="#57606a" stroke-width="1.3"/></g>
+<text x="295" y="397" font-size="12.5" font-weight="600" fill="#1F2328">SBOM</text>
+<text x="295" y="413" font-size="10" fill="#57606A">Syft CDX + SPDX</text>
+<rect x="435" y="370" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(446,390.0)"><path d="M12 2.4l8.2 3v6.1c0 5-3.4 8.7-8.2 10.1-4.8-1.4-8.2-5.1-8.2-10.1V5.4z" fill="#00A3E0"/><circle cx="11.2" cy="11" r="3" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M13.4 13.2l3 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></g>
+<text x="480" y="397" font-size="12.5" font-weight="600" fill="#1F2328">Trivy + OWASP</text>
+<text x="480" y="413" font-size="10" fill="#57606A">image &amp; NuGet CVEs</text>
+<rect x="620" y="370" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(631,390.0)"><rect x="1" y="1" width="22" height="22" rx="5" fill="#291A47"/><rect x="4.8" y="4.8" width="14.4" height="14.4" rx="2" fill="none" stroke="#fff" stroke-width="1.3"/><rect x="10.2" y="9.2" width="3.4" height="3.4" fill="#fff"/><path d="M7.2 13.4h9.6c0 2.2-1.6 3.4-3.6 3.4h-2.4c-2 0-3.6-1.2-3.6-3.4z" fill="#fff"/></g>
+<text x="665" y="397" font-size="12.5" font-weight="600" fill="#1F2328">black-box</text>
+<text x="665" y="413" font-size="10" fill="#57606A">Testcontainers</text>
+<rect x="805" y="370" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(816,390.0)"><circle cx="12" cy="12" r="11.5" fill="#57606a"/><path d="M12 17.5V7.5m0 0l-3.6 3.6M12 7.5l3.6 3.6" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="850" y="397" font-size="12.5" font-weight="600" fill="#1F2328">push</text>
+<text x="850" y="413" font-size="10" fill="#57606A">digest recorded</text>
+<rect x="40" y="580" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(51,600.0)"><rect x="2.5" y="3" width="19" height="18" rx="2.5" fill="#0078D4"/><path d="M6 8.2h12M6 12h12M6 15.8h7" stroke="#fff" stroke-width="1.5"/></g>
+<text x="85" y="607" font-size="12.5" font-weight="600" fill="#1F2328">GHCR / ACR / Artifactory</text>
+<text x="85" y="623" font-size="10" fill="#57606A">image@sha256:…</text>
+<rect x="340" y="580" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(351,600.0)"><circle cx="12" cy="12" r="11.5" fill="#1f2328"/><path d="M12 5c-3.6 0-6.5 2.9-6.5 6.6 0 2.9 1.9 5.3 4.4 6.2.3.1.4-.1.4-.3v-1.1c-1.8.4-2.2-.8-2.2-.8-.3-.8-.7-1-.7-1-.6-.4 0-.4 0-.4.7 0 1 .7 1 .7.6 1 1.6.7 2 .6.1-.4.2-.7.4-.9-1.4-.2-2.9-.7-2.9-3.2 0-.7.2-1.3.7-1.8-.1-.2-.3-.9.1-1.8 0 0 .5-.2 1.8.7.5-.2 1.1-.2 1.6-.2s1.1 0 1.6.2c1.2-.9 1.8-.7 1.8-.7.4.9.1 1.6.1 1.8.4.5.7 1.1.7 1.8 0 2.5-1.5 3-2.9 3.2.2.2.4.6.4 1.2v1.8c0 .2.1.4.4.3 2.5-.9 4.4-3.3 4.4-6.2C18.5 7.9 15.6 5 12 5z" fill="#fff"/></g>
+<text x="385" y="607" font-size="12.5" font-weight="600" fill="#1F2328">cd.yml</text>
+<text x="385" y="623" font-size="10" fill="#57606A">writes digest into Helm</text>
+<rect x="640" y="580" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(651,600.0)"><circle cx="12" cy="12" r="11.5" fill="#EF7B4D"/><circle cx="12" cy="10.2" r="3.8" fill="#fff"/><path d="M8.2 13.8c0 3 1.7 5 3.8 5s3.8-2 3.8-5" fill="none" stroke="#fff" stroke-width="1.6"/></g>
+<text x="685" y="607" font-size="12.5" font-weight="600" fill="#1F2328">Argo CD</text>
+<text x="685" y="623" font-size="10" fill="#57606A">auto-sync + self-heal</text>
+<rect x="940" y="580" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(951,600.0)"><path d="M12 1.7l8.6 4.1v8.4L12 22.3 3.4 14.2V5.8z" fill="#326CE5"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M12 8V6M12 16v2M8.6 10L6.9 9M15.4 10l1.7-1M8.6 14l-1.7 1M15.4 14l1.7 1" stroke="#fff" stroke-width="1.1"/></g>
+<text x="985" y="607" font-size="12.5" font-weight="600" fill="#1F2328">AKS</text>
+<text x="985" y="623" font-size="10" fill="#57606A">Helm chart, digest-pinned</text>
+<rect x="40" y="720" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(51,740.0)"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#57606a" stroke-width="1.8"/><path d="M12 6.4V12l3.6 2.6" fill="none" stroke="#57606a" stroke-width="1.8" stroke-linecap="round"/></g>
+<text x="85" y="747" font-size="12.5" font-weight="600" fill="#1F2328">nightly.yml</text>
+<text x="85" y="763" font-size="10" fill="#57606A">CVE rescan + upstream drift</text>
+<rect x="640" y="720" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(651,740.0)"><circle cx="12" cy="12" r="11.5" fill="#1f2328"/><path d="M12 5c-3.6 0-6.5 2.9-6.5 6.6 0 2.9 1.9 5.3 4.4 6.2.3.1.4-.1.4-.3v-1.1c-1.8.4-2.2-.8-2.2-.8-.3-.8-.7-1-.7-1-.6-.4 0-.4 0-.4.7 0 1 .7 1 .7.6 1 1.6.7 2 .6.1-.4.2-.7.4-.9-1.4-.2-2.9-.7-2.9-3.2 0-.7.2-1.3.7-1.8-.1-.2-.3-.9.1-1.8 0 0 .5-.2 1.8.7.5-.2 1.1-.2 1.6-.2s1.1 0 1.6.2c1.2-.9 1.8-.7 1.8-.7.4.9.1 1.6.1 1.8.4.5.7 1.1.7 1.8 0 2.5-1.5 3-2.9 3.2.2.2.4.6.4 1.2v1.8c0 .2.1.4.4.3 2.5-.9 4.4-3.3 4.4-6.2C18.5 7.9 15.6 5 12 5z" fill="#fff"/></g>
+<text x="685" y="747" font-size="12.5" font-weight="600" fill="#1F2328">deploy.yml</text>
+<text x="685" y="763" font-size="10" fill="#57606A">rejects tag-only refs</text>
+<rect x="940" y="720" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(951,740.0)"><path d="M10.2 3.4h4.9L20.9 20.6H14l-6.4-2.3 5.1-.6-2.9-3.8z" fill="#0078D4"/><path d="M8.6 6.2L3.1 18h4.5L15.3 3.4h-5z" fill="#5EA0EF"/></g>
+<text x="985" y="747" font-size="12.5" font-weight="600" fill="#1F2328">Azure App Service</text>
+<text x="985" y="763" font-size="10" fill="#57606A">WEBSITES_PORT=8080</text>
+<text x="340" y="826" font-size="11" fill="#57606A">solid = artifact flow&#160;&#160;·&#160;&#160;dashed = alternate driver / scheduled&#160;&#160;·&#160;&#160;nothing under upstream/ is ever edited</text>
+</svg>
